@@ -1,4 +1,4 @@
-console.log('Welcome to firstJSproject.')
+console.log('Welcome to first-js-server.')
 
 const http = require('http');
 const PORT = 3000;
@@ -9,12 +9,11 @@ const server = http.createServer((req, res) =>{
     res.writeHead(200,{'Content-Type': 'application/json'});
     res.write(
       JSON.stringify(
-        { number: 1 , name: 'John'}
-      )
-    );
+        {'TAG': 'B-007' , 'Rated flow': '50'}
+      ));
   } else {
     res.writeHead(200,{'Content-Type': 'text/html'});
-    res.write('<!DOCTYPE html><html><head><title>Page Title</title></head><body><h1>Hello World!</h1></body></html>');
+    res.write('<h1>Hello World!</h1>');
   }
   res.end();
 });
