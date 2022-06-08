@@ -4,7 +4,16 @@ const http = require('http');
 const PORT = 3000;
 
 const server = http.createServer((req, res) =>{
-  console.log(req.url);
+  console.log('[%s] request, url: %s', req.method, req.url);
+  if (req.method == 'POST') {
+    let body = [];
+    req.on('data', (chunk) => {
+      body.push(chunk);
+    }).on('end', () => {
+      body = Buffer.concat(body).toString();
+      console.log('  Data: %s',body)
+    });
+  }
   if (req.url == '/json') {
     res.writeHead(200,{'Content-Type': 'application/json'});
     res.write(
@@ -19,5 +28,5 @@ const server = http.createServer((req, res) =>{
 });
 
 server.listen(PORT, () => {
-  console.log('Listening on port ${PORT}');
+  console.log('Listening on port %d',PORT);
 });
